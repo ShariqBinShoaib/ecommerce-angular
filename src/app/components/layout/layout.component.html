@@ -1,3 +1,7 @@
-<app-header />
-<ng-content></ng-content>
-<app-footer />
+<div class="flex flex-col justify-between min-h-screen h-full">
+  <app-header />
+  <div class="px-4 pb-8">
+    <ng-content />
+  </div>
+  <app-footer />
+</div>
