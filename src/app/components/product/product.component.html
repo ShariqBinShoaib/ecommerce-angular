@@ -12,7 +12,6 @@
     <div class="flex justify-between">
       <h3 class="text-sm text-gray-700">
         <!-- <a href="#"> -->
-        <span aria-hidden="true" class="absolute inset-0"></span>
         {{ product?.title }}
         <!-- </a> -->
       </h3>
@@ -43,6 +42,8 @@
     </div>
   </div>
   <div class="mt-2">
-    <app-button className="w-full py-1.5">Add to cart</app-button>
+    <app-button className="w-full py-1.5" (onClick)="handleAddCart()">
+      Add to cart
+    </app-button>
   </div>
 </app-card>

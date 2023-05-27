@@ -3,7 +3,7 @@
     class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
     aria-label="Global"
   >
-    <div class="flex lg:flex-1">
+    <div class="flex">
       <a routerLink="" class="-m-1.5 p-1.5">
         <span class="sr-only">Your Company</span>
         <img
@@ -13,10 +13,10 @@
         />
       </a>
     </div>
-    <div class="lg:flex lg:gap-x-12">
+    <div class="lg:flex">
       <a
         routerLink="products"
-        class="text-sm font-semibold leading-6 text-gray-900"
+        class="text-sm font-semibold leading-6 text-gray-900 mr-4 lg:mr-6"
       >
         Products
       </a>
@@ -27,13 +27,30 @@
         About
       </a>
     </div>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+    <div class="lg:flex lg:justify-end">
       <a
         routerLink="cart"
-        class="text-sm font-semibold leading-6 text-gray-900"
+        class="text-sm font-semibold leading-6 text-gray-900 relative inline-flex items-center p-1 text-center rounded-lg focus:outline-none"
       >
-        Cart
-        <span aria-hidden="true">&rarr;</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="{1.5}"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+          />
+        </svg>
+        <div
+          class="absolute inline-flex items-center justify-center w-5 h-5 text-[9px] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2"
+        >
+          {{ totalCarts }}
+        </div>
       </a>
     </div>
   </nav>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { GetAllProductsResponse } from '../types';
+import { GetAllProductsResponse } from '../../types';
 
 @Injectable({
   providedIn: 'root',

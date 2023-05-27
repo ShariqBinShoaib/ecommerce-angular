@@ -21,3 +21,37 @@ export interface Product {
 export interface GetAllProductsResponse extends GetAllResponse {
   products: Product[];
 }
+
+interface CartPayloadProduct {
+  id: number;
+  quantity: number;
+}
+
+export interface CartPayload {
+  userId: number;
+  products: CartPayloadProduct[];
+}
+
+interface CartResponseProduct {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  total: number;
+  discountedPercentage: number;
+  discountedPrice: number;
+}
+
+export interface CartResponse {
+  id: number;
+  total: number;
+  discountedTotal: number;
+  userId: number;
+  totalProducts: number;
+  totalQuantity: number;
+  products: CartResponseProduct[];
+}
+
+export interface GetUserCartResponse extends GetAllResponse {
+  carts: CartResponse[];
+}
