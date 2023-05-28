@@ -1,8 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, map } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, map } from 'rxjs';
 
-import { CartPayload, CartResponse, GetUserCartResponse } from 'src/app/types';
+import {
+  CartPayload,
+  CartProduct,
+  CartResponse,
+  GetUserCartResponse,
+} from 'src/app/types';
 
 const cartInitalValues = {
   id: 0,
@@ -14,13 +19,14 @@ const cartInitalValues = {
   totalQuantity: 0,
 };
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class CartService {
-  private cartCountSubject: Subject<number> = new Subject<number>();
+  private cartData: CartResponse = cartInitalValues;
 
-  cartData: CartResponse = cartInitalValues;
+  private cartCountSubject = new Subject<number>();
+  private cartDataSubject = new BehaviorSubject<CartResponse>(cartInitalValues);
+
+  cartData$: Observable<CartResponse> = this.cartDataSubject.asObservable();
   cartCount$: Observable<number> = this.cartCountSubject.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -36,6 +42,7 @@ export class CartService {
       products: [...this.cartData.products, ...cart.products],
     };
 
+    this.cartDataSubject.next(this.cartData);
     this.cartCountSubject.next(this.cartData.totalQuantity);
   }
 
@@ -47,5 +54,25 @@ export class CartService {
     return this.http
       .get<GetUserCartResponse>(`/carts/user/${userId}`)
       .pipe(map((item) => item.carts[0]));
+  }
+
+  deleteCartItem(cartProduct: CartProduct) {
+    const filteredProducts = this.cartData.products.filter(
+      (product) => product.id !== cartProduct.id
+    );
+
+    this.cartData = {
+      id: this.cartData.id,
+      userId: this.cartData.userId,
+      discountedTotal:
+        this.cartData.discountedTotal - cartProduct.discountedPrice,
+      total: this.cartData.total - cartProduct.total,
+      totalProducts: this.cartData.totalProducts - 1,
+      totalQuantity: this.cartData.totalQuantity - cartProduct.quantity,
+      products: filteredProducts,
+    };
+
+    this.cartDataSubject.next(this.cartData);
+    this.cartCountSubject.next(this.cartData.totalQuantity);
   }
 }

@@ -12,9 +12,11 @@ import { ButtonComponent } from './components/shared/button/button.component';
 import { ProductComponent } from './components/product/product.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { SkeletonComponent } from './components/shared/skeleton/skeleton.component';
+
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { SkeletonComponent } from './components/shared/skeleton/skeleton.component';
 import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
@@ -26,9 +28,10 @@ import { CartComponent } from './pages/cart/cart.component';
     ProductComponent,
     FooterComponent,
     LayoutComponent,
+    SkeletonComponent,
+    CartItemComponent,
     HomeComponent,
     ProductsComponent,
-    SkeletonComponent,
     CartComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],

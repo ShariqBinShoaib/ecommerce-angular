@@ -32,7 +32,7 @@ export interface CartPayload {
   products: CartPayloadProduct[];
 }
 
-interface CartResponseProduct {
+export interface CartProduct {
   id: number;
   title: string;
   price: number;
@@ -49,7 +49,7 @@ export interface CartResponse {
   userId: number;
   totalProducts: number;
   totalQuantity: number;
-  products: CartResponseProduct[];
+  products: CartProduct[];
 }
 
 export interface GetUserCartResponse extends GetAllResponse {
