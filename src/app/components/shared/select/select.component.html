@@ -1,0 +1,68 @@
+<div>
+  <label
+    class="block mb-2 text-sm font-medium text-gray-900"
+    *ngIf="label"
+    [htmlFor]="name"
+  >
+    {{ label }}
+  </label>
+
+  <div class="flex relative p-2.5 border border-gray-200 rounded-lg">
+    <div
+      class="text-center absolute z-[-1] left-2 pt-1 block text-xs uppercase text-gray-400 tracking-wide font-semibold"
+      *ngIf="startText"
+    >
+      {{ startText }}
+    </div>
+    <select
+      [id]="name"
+      [name]="name"
+      class="cursor-pointer appearance-none bg-transparent outline-none pl-8 pr-4 text-gray-600"
+      (change)="handleChange($event)"
+      (blur)="handleBlur($event)"
+      [ngModel]="value"
+      (ngModelChange)="onValueChange($event)"
+    >
+      <option *ngFor="let option of options" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+
+    <svg
+      class="w-5 h-5 text-gray-400 absolute right-1 bottom-3 z-[-1]"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      *ngIf="type === 'numeric'; else showTextIcon"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+      />
+    </svg>
+
+    <ng-template #showTextIcon>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-5 h-5 text-gray-400 absolute right-1 bottom-3 z-[-1]"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+        />
+      </svg>
+    </ng-template>
+  </div>
+
+  <p *ngIf="error" class="mt-1 text-xs text-red-600">
+    {{ error }}
+  </p>
+</div>

@@ -55,3 +55,8 @@ export interface CartResponse {
 export interface GetUserCartResponse extends GetAllResponse {
   carts: CartResponse[];
 }
+
+export interface SelectOption {
+  label: string;
+  value: number | string;
+}
