@@ -1,0 +1,24 @@
+<div class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4">
+  <ng-container *ngFor="let img of images; let idx = index">
+    <div
+      *ngIf="selectedImage === img"
+      class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
+    >
+      <span class="text-5xl">{{ idx }}</span>
+    </div>
+  </ng-container>
+</div>
+
+<div class="flex -mx-2 mb-4">
+  <div class="flex-1 px-2" *ngFor="let img of images; let idx = index">
+    <button
+      (click)="handleImageSelect(img)"
+      [ngClass]="{
+        'ring-2 ring-indigo-300 ring-inset': img === selectedImage
+      }"
+      class="focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center"
+    >
+      <span class="text-2xl">{{ idx }}</span>
+    </button>
+  </div>
+</div>

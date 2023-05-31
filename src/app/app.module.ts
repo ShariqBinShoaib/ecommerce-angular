@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { BaseUrlInterceptor } from './services/http/base-url.interceptor';
 
@@ -18,6 +19,10 @@ import { SkeletonComponent } from './components/shared/skeleton/skeleton.compone
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { ProductImagesComponent } from './components/product-images/product-images.component';
+import { ProductInfoComponent } from './components/product-info/product-info.component';
+import { SelectComponent } from './components/shared/select/select.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +38,12 @@ import { CartComponent } from './pages/cart/cart.component';
     HomeComponent,
     ProductsComponent,
     CartComponent,
+    ProductDetailComponent,
+    ProductImagesComponent,
+    ProductInfoComponent,
+    SelectComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

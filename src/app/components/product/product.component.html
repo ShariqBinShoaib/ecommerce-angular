@@ -1,19 +1,21 @@
 <app-card>
-  <div
-    class="aspect-h-1 h-48 aspect-w-1 w-full bg-slate-50 overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75"
-  >
-    <img
-      [src]="product?.thumbnail"
-      alt="electronic item"
-      class="h-full w-full object-contain object-center lg:h-full lg:w-full"
-    />
-  </div>
+  <a [routerLink]="['/products', product?.id]">
+    <div
+      class="aspect-h-1 h-48 aspect-w-1 w-full bg-slate-50 overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75"
+    >
+      <img
+        [src]="product?.thumbnail"
+        alt="electronic item"
+        class="h-full w-full object-contain object-center lg:h-full lg:w-full"
+      />
+    </div>
+  </a>
   <div class="mt-4">
     <div class="flex justify-between">
       <h3 class="text-sm text-gray-700">
-        <!-- <a href="#"> -->
-        {{ product?.title }}
-        <!-- </a> -->
+        <a [routerLink]="['/products', product?.id]">
+          {{ product?.title }}
+        </a>
       </h3>
       <p class="text-sm font-medium text-gray-900">${{ product?.price }}</p>
     </div>
