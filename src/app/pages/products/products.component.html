@@ -1,4 +1,4 @@
-<div class="container lg:px-8 mx-auto">
+<div class="max-w-7xl lg:px-8 mx-auto">
   <h1 class="font-bold text-2xl">Collections</h1>
   <div
     class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
@@ -9,7 +9,7 @@
 
     <ng-container *ngIf="loading">
       <app-card *ngFor="let item of skeletonArray">
-        <app-skeleton />
+        <app-skeleton type="product-card" />
       </app-card>
     </ng-container>
   </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { Product, SelectOption } from 'src/app/types';
 
@@ -7,9 +7,10 @@ import { Product, SelectOption } from 'src/app/types';
   templateUrl: './product-info.component.html',
   styleUrls: ['./product-info.component.css'],
 })
-export class ProductInfoComponent {
+export class ProductInfoComponent implements OnChanges {
   @Input() productInfo?: Omit<Product, 'images'>;
   selectedQuantity: string = '1';
+  ratingArray: unknown[] = [];
 
   qtyOptions: SelectOption[] = [
     { label: '1', value: 1 },
@@ -20,6 +21,10 @@ export class ProductInfoComponent {
   ];
 
   constructor(private cartService: CartService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ratingArray = Array(Math.round(this.productInfo?.rating || 0));
+  }
 
   handleSelect(event: Event) {
     const target = event.target as HTMLSelectElement;

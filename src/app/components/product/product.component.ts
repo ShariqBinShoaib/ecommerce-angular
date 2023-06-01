@@ -10,7 +10,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class ProductComponent implements OnInit {
   @Input() product: Product | null = null;
-  ratingArray: any[] = [];
+  ratingArray: unknown[] = [];
 
   constructor(private cartService: CartService) {}
 

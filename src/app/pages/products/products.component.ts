@@ -10,7 +10,7 @@ import { finalize } from 'rxjs';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  skeletonArray: any[] = Array(8);
+  skeletonArray: unknown[] = Array(8);
   loading = false;
 
   constructor(private productService: ProductService) {}

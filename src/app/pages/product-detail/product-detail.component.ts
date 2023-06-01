@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { finalize } from 'rxjs';
 
 import { ProductService } from 'src/app/services/product/product.service';
 import { Product } from 'src/app/types';
 
 const productInitValues = {
   id: 0,
-  title: 'string',
-  description: 'string',
+  title: '',
+  description: '',
   price: 0,
   discountPercentage: 0,
   rating: 0,
   stock: 0,
-  brand: 'string',
-  category: 'string',
-  thumbnail: 'string',
+  brand: '',
+  category: '',
+  thumbnail: '',
   images: [],
 };
 
@@ -25,6 +26,7 @@ const productInitValues = {
 })
 export class ProductDetailComponent implements OnInit {
   product: Product = productInitValues;
+  loading: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -35,9 +37,21 @@ export class ProductDetailComponent implements OnInit {
     const productId = this.route.snapshot.paramMap.get('id');
 
     if (productId) {
-      this.productService.getProductById(productId).subscribe((value) => {
-        this.product = value;
-      });
+      this.loading = true;
+
+      this.productService
+        .getProductById(productId)
+        .pipe(
+          finalize(() => {
+            this.loading = false;
+          })
+        )
+        .subscribe({
+          next: (res) => {
+            this.product = res;
+          },
+          error: (error) => console.error(error),
+        });
     }
   }
 }
