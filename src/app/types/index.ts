@@ -4,6 +4,10 @@ export interface GetAllResponse {
   total: number;
 }
 
+export interface BadRequestResponse {
+  message: string;
+}
+
 export interface Product {
   id: number;
   title: string;

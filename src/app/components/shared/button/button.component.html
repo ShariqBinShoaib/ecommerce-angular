@@ -2,7 +2,8 @@
   [class]="variantsClasses[variant]"
   (click)="onButtonClick($event)"
   [ngClass]="className"
-  [type]="type"
+  [type]="buttonType"
+  [disabled]="disabled"
 >
   <ng-content />
 </button>
