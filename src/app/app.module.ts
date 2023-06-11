@@ -27,6 +27,8 @@ import { CartComponent } from './pages/cart/cart.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SvgIconComponent } from './components/shared/svg-icon/svg-icon.component';
 
+import { InputValidatorDirective } from './components/shared/input/validator.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +50,7 @@ import { SvgIconComponent } from './components/shared/svg-icon/svg-icon.componen
     InputComponent,
     LoginComponent,
     SvgIconComponent,
+    InputValidatorDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [

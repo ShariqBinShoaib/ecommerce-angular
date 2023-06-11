@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AuthService, LoginPayload } from 'src/app/services/auth/auth.service';
-import { BadRequestResponse } from 'src/app/types';
+import { BadRequestResponse, ValidationSchema } from 'src/app/types';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +17,25 @@ export class LoginComponent implements OnInit {
   loginData: LoginPayload = {
     username: '',
     password: '',
+  };
+
+  validationSchema: ValidationSchema<LoginPayload> = {
+    username: {
+      required: {
+        value: true,
+        message: 'Username is required',
+      },
+      minlength: {
+        value: '3',
+        message: 'Must have atleast 3 characters',
+      },
+    },
+    password: {
+      required: {
+        value: true,
+        message: 'Password is required',
+      },
+    },
   };
 
   constructor(private authService: AuthService, private router: Router) {}

@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+
 export interface GetAllResponse {
   limit: number;
   skip: number;
@@ -64,3 +66,33 @@ export interface SelectOption {
   label: string;
   value: number | string;
 }
+
+export type ValidationTypes =
+  | 'required'
+  | 'pattern'
+  | 'minlength'
+  | 'maxlength'
+  | 'min'
+  | 'max'
+  | 'customValidator';
+
+export type CustomValidator = (
+  control: FormControl
+) => Record<string, any> | null;
+
+export type ValidatorValue<T extends ValidationTypes> = T extends 'required'
+  ? boolean
+  : T extends 'customValidator'
+  ? CustomValidator
+  : string;
+
+export type Validators = {
+  [Type in ValidationTypes]?: {
+    value: ValidatorValue<Type>;
+    message: string;
+  };
+};
+
+export type ValidationSchema<T extends Record<string, any>> = {
+  [Property in keyof T]?: Validators;
+};

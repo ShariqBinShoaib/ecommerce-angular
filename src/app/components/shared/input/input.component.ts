@@ -5,7 +5,12 @@ import {
   Output,
   forwardRef,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
+import { Validators } from 'src/app/types';
 
 @Component({
   selector: 'app-input',
@@ -30,6 +35,8 @@ export class InputComponent implements ControlValueAccessor {
   @Input() value?: string;
   @Input() error?: string;
   @Input() placeholder?: string;
+  @Input() required: boolean = false;
+  @Input() validators?: Validators;
 
   @Output() valueChange = new EventEmitter<string>();
   @Output() onChange = new EventEmitter<Event>();
@@ -38,17 +45,25 @@ export class InputComponent implements ControlValueAccessor {
   protected _onChange = () => {};
   protected _onBlur = () => {};
 
-  onValueChange(value: string) {
-    this.value = value;
-    this.valueChange.emit(value);
-  }
-
-  handleChange(event: Event) {
+  protected handleChange(event: Event) {
     this.onChange.emit(event);
   }
 
-  handleBlur(event: Event) {
+  protected handleBlur(event: Event) {
     this.onBlur.emit(event);
+  }
+
+  protected customValidator(control: FormControl) {
+    if (this.validators?.customValidator) {
+      return this.validators.customValidator?.value;
+    }
+
+    return null;
+  }
+
+  onValueChange(value: string) {
+    this.value = value;
+    this.valueChange.emit(value);
   }
 
   registerOnChange(fn: any): void {

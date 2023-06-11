@@ -32,6 +32,8 @@
             label="Username"
             placeholder="Enter username"
             [(ngModel)]="loginData.username"
+            [validators]="validationSchema.username"
+            validator
           >
             <app-svg-icon name="user" className="w-5 h-5" startIcon />
           </app-input>
@@ -41,6 +43,7 @@
             type="password"
             placeholder="Enter password"
             [(ngModel)]="loginData.password"
+            [validators]="validationSchema.password"
           >
             <app-svg-icon name="key" className="w-5 h-5" startIcon />
           </app-input>
@@ -69,7 +72,7 @@
             </a>
           </div>
           <app-button
-            [disabled]="!loginForm.form.valid || loading"
+            [disabled]="loading"
             className="w-full mt-4"
             buttonType="submit"
           >
@@ -85,3 +88,4 @@
     </div>
   </div>
 </section>
+{{ loginForm.form.valid | json }}
