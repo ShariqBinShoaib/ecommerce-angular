@@ -3,7 +3,7 @@
     <div class="w-full bg-sky-50 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1
-          class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"
+          class="mb-6 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"
         >
           Sign in to your account
         </h1>
@@ -16,7 +16,6 @@
             name="info"
             className="flex-shrink-0 inline w-5 h-5 mr-3 mb-1"
           />
-          <span class="sr-only">Info</span>
           <div>
             <span class="font-medium">Error!</span> {{ error.message }}, please
             try again
@@ -27,24 +26,35 @@
           #loginForm="ngForm"
           (ngSubmit)="handleSubmit()"
         >
-          <app-input
-            name="username"
-            label="Username"
-            placeholder="Enter username"
-            [(ngModel)]="loginData.username"
-          >
-            <app-svg-icon name="user" className="w-5 h-5" startIcon />
-          </app-input>
-          <app-input
-            name="password"
-            label="Password"
-            type="password"
-            placeholder="Enter password"
-            [(ngModel)]="loginData.password"
-          >
-            <app-svg-icon name="key" className="w-5 h-5" startIcon />
-          </app-input>
-
+          <div class="mb-6">
+            <app-input
+              name="username"
+              label="Username"
+              placeholder="Enter username"
+              [(ngModel)]="loginData.username"
+              required
+              [errorMessage]="{
+                required: 'Username is required'
+              }"
+            >
+              <app-svg-icon name="user" className="w-5 h-5" startIcon />
+            </app-input>
+          </div>
+          <div class="mb-6">
+            <app-input
+              name="password"
+              label="Password"
+              type="password"
+              placeholder="Enter password"
+              [(ngModel)]="loginData.password"
+              required
+              [errorMessage]="{
+                required: 'Password is required'
+              }"
+            >
+              <app-svg-icon name="key" className="w-5 h-5" startIcon />
+            </app-input>
+          </div>
           <div class="flex items-center justify-between">
             <div class="flex items-start">
               <div class="flex items-center h-5">

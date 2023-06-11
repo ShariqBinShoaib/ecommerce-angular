@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export type IconNames = 'cart' | 'user' | 'key' | 'info' | 'loader';
+export type IconNames = 'cart' | 'user' | 'key' | 'info' | 'search' | 'loader';
 
 @Component({
   selector: 'app-svg-icon',
