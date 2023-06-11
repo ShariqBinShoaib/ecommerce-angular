@@ -1,15 +1,16 @@
 <div>
   <label
-    for="input-group-1"
-    class="block mb-2 text-sm font-medium text-gray-900"
+    *ngIf="label"
+    [htmlFor]="name"
+    class="block mb-1 text-sm font-medium text-gray-900"
   >
     {{ label }}
   </label>
-  <div class="relative mb-6">
+  <div class="relative">
     <div
       class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500"
-      #iconRef
-      [ngClass]="{ hidden: !iconRef.children.length }"
+      #startIconRef
+      [ngClass]="{ hidden: !startIconRef.children.length }"
     >
       <ng-content select="[startIcon]"></ng-content>
     </div>
@@ -19,14 +20,47 @@
       [name]="name"
       [placeholder]="placeholder"
       class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none block w-full p-2.5"
-      [ngClass]="{ 'pl-10': iconRef.children.length > 0 }"
       (input)="handleChange($event)"
       (blur)="handleBlur($event)"
       [ngModel]="value"
       (ngModelChange)="onValueChange($event)"
+      [ngClass]="{
+        'pl-10': startIconRef.children.length > 0,
+        'pr-10': endIconRef.children.length > 0
+      }"
     />
+    <div
+      class="absolute inset-y-0 right-3 flex items-center pl-3 pointer-events-none text-gray-500"
+      #endIconRef
+      [ngClass]="{ hidden: !endIconRef.children.length }"
+    >
+      <ng-content select="[endIcon]"></ng-content>
+    </div>
   </div>
-  <p class="mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="error">
-    {{ error }}
+  <p
+    class="mt-[1px] text-[12px] text-red-600 dark:text-red-500"
+    *ngIf="isFieldInvalid"
+  >
+    <ng-container *ngIf="errors['required']">
+      {{ errorMessage?.required }}
+    </ng-container>
+    <ng-container *ngIf="errors['pattern']">
+      {{ errorMessage?.pattern }}
+    </ng-container>
+    <ng-container *ngIf="errors['minlength']">
+      {{ errorMessage?.minlength }}
+    </ng-container>
+    <ng-container *ngIf="errors['maxlength']">
+      {{ errorMessage?.maxlength }}
+    </ng-container>
+    <ng-container *ngIf="errors['min']">
+      {{ errorMessage?.min }}
+    </ng-container>
+    <ng-container *ngIf="errors['max']">
+      {{ errorMessage?.max }}
+    </ng-container>
+    <ng-container *ngIf="errors['customValidator']">
+      {{ errorMessage?.customValidator }}
+    </ng-container>
   </p>
 </div>
