@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           this.authService.saveAuthInfoInLocalStorage(res);
           this.authService.setAuthInfo(res);
+          window.location.href = '/';
         },
         error: (err: HttpErrorResponse) => {
           this.error = err.error;

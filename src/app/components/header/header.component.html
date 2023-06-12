@@ -56,9 +56,19 @@
       <a
         routerLink="login"
         class="text-sm font-semibold leading-6 text-gray-900 mr-4 ml-6"
+        *ngIf="!isAuthenticated; else logout"
       >
         Login
       </a>
+      <ng-template #logout>
+        <app-button
+          variant="text"
+          className="text-sm font-semibold leading-6 text-gray-900 mr-4 ml-6"
+          (onClick)="handleLogout()"
+        >
+          Logout
+        </app-button>
+      </ng-template>
     </div>
   </nav>
 </header>

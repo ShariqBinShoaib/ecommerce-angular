@@ -32,8 +32,18 @@ export class AuthService {
     return this.http.post<LoginResponse>('/auth/login', payload);
   }
 
+  logout() {
+    this.removeAuthInfoFromLocalStorage();
+    this.authInfoSubject.next(null);
+    this.isAuthenticated = false;
+  }
+
   saveAuthInfoInLocalStorage(authInfo: LoginResponse) {
     localStorage.setItem('authInfo', JSON.stringify(authInfo));
+  }
+
+  removeAuthInfoFromLocalStorage() {
+    localStorage.removeItem('authInfo');
   }
 
   getAuthInfoFromLocalStorage() {
