@@ -7,6 +7,7 @@ import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { MainComponent } from './main.component';
+import { AboutComponent } from 'src/app/pages/about/about.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
       },
       {
         path: 'products/:id',

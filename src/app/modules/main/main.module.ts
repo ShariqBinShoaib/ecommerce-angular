@@ -39,6 +39,5 @@ import { CartService } from 'src/app/services/cart/cart.service';
   ],
   providers: [CartService],
   imports: [CommonModule, MainRoutingModule, SharedModule, FormsModule],
-  bootstrap: [MainComponent],
 })
 export class MainModule {}
