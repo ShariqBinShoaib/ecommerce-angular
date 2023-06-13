@@ -27,12 +27,9 @@ export class ProductComponent implements OnInit {
   handleAddCart() {
     if (this.authService.isAuthenticated && this.product) {
       this.cartService
-        .addCart({
-          userId: 1,
-          products: [{ id: this.product.id, quantity: 1 }],
-        })
+        .addCart({ id: this.product.id, quantity: 1 })
         .subscribe((value) => {
-          this.cartService.setCartData(value);
+          if (value) this.cartService.setCartData(value);
         });
     } else {
       this.router.navigate(['/login']);

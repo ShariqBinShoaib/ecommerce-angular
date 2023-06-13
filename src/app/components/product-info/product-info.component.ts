@@ -1,4 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { Product, SelectOption } from 'src/app/types';
 
@@ -20,7 +22,11 @@ export class ProductInfoComponent implements OnChanges {
     { label: '5', value: 5 },
   ];
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.ratingArray = Array(Math.round(this.productInfo?.rating || 0));
@@ -32,20 +38,17 @@ export class ProductInfoComponent implements OnChanges {
   }
 
   handleAddCart() {
-    if (this.productInfo) {
+    if (this.authService.isAuthenticated && this.productInfo) {
       this.cartService
         .addCart({
-          userId: 1,
-          products: [
-            {
-              id: this.productInfo.id,
-              quantity: Number(this.selectedQuantity),
-            },
-          ],
+          id: this.productInfo.id,
+          quantity: Number(this.selectedQuantity),
         })
         .subscribe((value) => {
-          this.cartService.setCartData(value);
+          if (value) this.cartService.setCartData(value);
         });
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 }

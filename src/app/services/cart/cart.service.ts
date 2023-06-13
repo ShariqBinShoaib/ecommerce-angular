@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject, map } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, Subject, BehaviorSubject, map, switchMap, of } from 'rxjs';
 
 import {
   CartPayload,
+  CartPayloadProduct,
   CartProduct,
   CartResponse,
   GetUserCartResponse,
 } from 'src/app/types';
+import { AuthService } from '../auth/auth.service';
 
 const cartInitalValues = {
   id: 0,
@@ -19,7 +21,7 @@ const cartInitalValues = {
   totalQuantity: 0,
 };
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class CartService {
   private cartData: CartResponse = cartInitalValues;
 
@@ -29,31 +31,56 @@ export class CartService {
   cartData$: Observable<CartResponse> = this.cartDataSubject.asObservable();
   cartCount$: Observable<number> = this.cartCountSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  setCartData(cart: CartResponse) {
-    this.cartData = {
-      id: cart.id,
-      userId: cart.userId,
-      discountedTotal: this.cartData.discountedTotal + cart.discountedTotal,
-      total: this.cartData.total + cart.total,
-      totalProducts: this.cartData.totalProducts + cart.totalProducts,
-      totalQuantity: this.cartData.totalQuantity + cart.totalQuantity,
-      products: [...this.cartData.products, ...cart.products],
-    };
+  setCartData(cart: CartResponse | null) {
+    if (cart) {
+      this.cartData = {
+        id: cart.id,
+        userId: cart.userId,
+        discountedTotal: this.cartData.discountedTotal + cart.discountedTotal,
+        total: this.cartData.total + cart.total,
+        totalProducts: this.cartData.totalProducts + cart.totalProducts,
+        totalQuantity: this.cartData.totalQuantity + cart.totalQuantity,
+        products: [...this.cartData.products, ...cart.products],
+      };
 
-    this.cartDataSubject.next(this.cartData);
-    this.cartCountSubject.next(this.cartData.totalQuantity);
+      this.cartDataSubject.next(this.cartData);
+      this.cartCountSubject.next(this.cartData.totalQuantity);
+    } else {
+      this.cartData = cartInitalValues;
+      this.cartDataSubject.next(cartInitalValues);
+      this.cartCountSubject.next(0);
+    }
   }
 
-  addCart(cart: CartPayload) {
-    return this.http.post<CartResponse>('/carts/add', cart);
+  addCart(product: CartPayloadProduct) {
+    return this.authService.authInfo$.pipe(
+      switchMap((value) => {
+        if (value) {
+          const cart = {
+            userId: value.id,
+            products: [product],
+          };
+
+          return this.http.post<CartResponse>('/carts/add', cart);
+        }
+        return of(null);
+      })
+    );
   }
 
-  getUserCarts(userId: number) {
-    return this.http
-      .get<GetUserCartResponse>(`/carts/user/${userId}`)
-      .pipe(map((item) => item.carts[0]));
+  getUserCarts() {
+    return this.authService.authInfo$.pipe(
+      switchMap((value) => {
+        if (value) {
+          return this.http
+            .get<GetUserCartResponse>(`/carts/user/${value.id}`)
+            .pipe(map((item) => item.carts[0]));
+        }
+        return of(null);
+      })
+    );
   }
 
   deleteCartItem(cartProduct: CartProduct) {

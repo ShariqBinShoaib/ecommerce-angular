@@ -26,7 +26,7 @@ export interface GetAllProductsResponse extends GetAllResponse {
   products: Product[];
 }
 
-interface CartPayloadProduct {
+export interface CartPayloadProduct {
   id: number;
   quantity: number;
 }

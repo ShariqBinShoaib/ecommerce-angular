@@ -1,97 +1,121 @@
-<section>
-  <div class="flex flex-col items-center px-6 py-8 mx-auto">
-    <div class="w-full bg-sky-50 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h1
-          class="mb-6 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"
-        >
-          Sign in to your account
-        </h1>
-        <div
-          class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100"
-          role="alert"
-          *ngIf="error"
-        >
-          <app-svg-icon
-            name="info"
-            className="flex-shrink-0 inline w-5 h-5 mr-3 mb-1"
+<main>
+  <header class="bg-white relative z-10">
+    <nav
+      class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+      aria-label="Global"
+    >
+      <div class="flex">
+        <a routerLink="" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <img
+            class="h-8 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt=""
           />
-          <div>
-            <span class="font-medium">Error!</span> {{ error.message }}, please
-            try again
-          </div>
-        </div>
-        <form
-          class="space-y-4 md:space-y-6"
-          #loginForm="ngForm"
-          (ngSubmit)="handleSubmit()"
-        >
-          <div class="mb-6">
-            <app-input
-              name="username"
-              label="Username"
-              placeholder="Enter username"
-              [(ngModel)]="loginData.username"
-              required
-              [errorMessage]="{
-                required: 'Username is required'
-              }"
-            >
-              <app-svg-icon name="user" className="w-5 h-5" startIcon />
-            </app-input>
-          </div>
-          <div class="mb-6">
-            <app-input
-              name="password"
-              label="Password"
-              type="password"
-              placeholder="Enter password"
-              [(ngModel)]="loginData.password"
-              required
-              [errorMessage]="{
-                required: 'Password is required'
-              }"
-            >
-              <app-svg-icon name="key" className="w-5 h-5" startIcon />
-            </app-input>
-          </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-start">
-              <div class="flex items-center h-5">
-                <input
-                  id="remember"
-                  aria-describedby="remember"
-                  type="checkbox"
-                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
-                />
-              </div>
-              <div class="ml-3 text-sm">
-                <label for="remember" class="text-gray-500">
-                  Remember me
-                </label>
-              </div>
-            </div>
-            <a
-              href="#"
-              class="text-sm font-medium text-primary-600 hover:underline"
-            >
-              Forgot password?
-            </a>
-          </div>
-          <app-button
-            [disabled]="!loginForm.form.valid || loading"
-            className="w-full mt-4"
-            buttonType="submit"
+        </a>
+      </div>
+    </nav>
+  </header>
+  <section
+    class="flex justify-center items-center"
+    style="height: calc(100vh - 150px)"
+  >
+    <div class="flex flex-col w-full items-center px-6 py-8 mx-auto">
+      <div
+        class="w-full bg-sky-50 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0"
+      >
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <h1
+            class="mb-6 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"
           >
-            <span class="mr-2">Sign in</span>
+            Sign in to your account
+          </h1>
+          <div
+            class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100"
+            role="alert"
+            *ngIf="error"
+          >
             <app-svg-icon
-              name="loader"
-              className="h-4 w-4 inline-block"
-              *ngIf="loading"
+              name="info"
+              className="flex-shrink-0 inline w-5 h-5 mr-3 mb-1"
             />
-          </app-button>
-        </form>
+            <div>
+              <span class="font-medium">Error!</span> {{ error.message }},
+              please try again
+            </div>
+          </div>
+          <form
+            class="space-y-4 md:space-y-6"
+            #loginForm="ngForm"
+            (ngSubmit)="handleSubmit()"
+          >
+            <div class="mb-6">
+              <app-input
+                name="username"
+                label="Username"
+                placeholder="Enter username"
+                [(ngModel)]="loginData.username"
+                required
+                [errorMessage]="{
+                  required: 'Username is required'
+                }"
+              >
+                <app-svg-icon name="user" className="w-5 h-5" startIcon />
+              </app-input>
+            </div>
+            <div class="mb-6">
+              <app-input
+                name="password"
+                label="Password"
+                type="password"
+                placeholder="Enter password"
+                [(ngModel)]="loginData.password"
+                required
+                [errorMessage]="{
+                  required: 'Password is required'
+                }"
+              >
+                <app-svg-icon name="key" className="w-5 h-5" startIcon />
+              </app-input>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input
+                    id="remember"
+                    aria-describedby="remember"
+                    type="checkbox"
+                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
+                  />
+                </div>
+                <div class="ml-3 text-sm">
+                  <label for="remember" class="text-gray-500">
+                    Remember me
+                  </label>
+                </div>
+              </div>
+              <a
+                href="#"
+                class="text-sm font-medium text-primary-600 hover:underline"
+              >
+                Forgot password?
+              </a>
+            </div>
+            <app-button
+              [disabled]="!loginForm.form.valid || loading"
+              className="w-full mt-4"
+              buttonType="submit"
+            >
+              <span class="mr-2">Sign in</span>
+              <app-svg-icon
+                name="loader"
+                className="h-4 w-4 inline-block"
+                *ngIf="loading"
+              />
+            </app-button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>

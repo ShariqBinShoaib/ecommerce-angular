@@ -32,7 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cartCountSubscription.unsubscribe();
+    if (this.cartCountSubscription) this.cartCountSubscription.unsubscribe();
+    this.totalCarts = 0;
   }
 
   handleLogout() {
