@@ -1,35 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/types';
+import { Component } from '@angular/core';
+import { HttpRequestState, Product } from 'src/app/types';
 import { ProductService } from 'src/app/services/product/product.service';
-import { finalize } from 'rxjs';
+import { Observable } from 'rxjs';
+import { httpRequestStates } from 'src/app/utils';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
-export class ProductsComponent implements OnInit {
-  products: Product[] = [];
+export class ProductsComponent {
   skeletonArray: unknown[] = Array(8);
-  loading = false;
 
   constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {
-    this.loading = true;
-
-    this.productService
-      .getProducts()
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        })
-      )
-      .subscribe({
-        next: (res) => {
-          this.products = res;
-        },
-        error: (error) => console.error(error),
-      });
-  }
+  readonly ptoductsStream$: Observable<HttpRequestState<Product[]>> =
+    this.productService.getProducts().pipe(httpRequestStates);
 }

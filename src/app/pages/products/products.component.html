@@ -3,14 +3,16 @@
   <div
     class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
   >
-    <ng-container *ngIf="!loading">
-      <app-product *ngFor="let product of products" [product]="product" />
-    </ng-container>
+    <ng-container *ngIf="ptoductsStream$ | async as data">
+      <ng-container *ngIf="data.value">
+        <app-product *ngFor="let product of data.value" [product]="product" />
+      </ng-container>
 
-    <ng-container *ngIf="loading">
-      <app-card *ngFor="let item of skeletonArray">
-        <app-skeleton type="product-card" />
-      </app-card>
+      <ng-container *ngIf="data.isLoading">
+        <app-card *ngFor="let item of skeletonArray">
+          <app-skeleton type="product-card" />
+        </app-card>
+      </ng-container>
     </ng-container>
   </div>
 </div>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { finalize } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 
 import { ProductService } from 'src/app/services/product/product.service';
-import { Product } from 'src/app/types';
+import { HttpRequestState, Product } from 'src/app/types';
+import { httpRequestStates } from 'src/app/utils';
 
 const productInitValues = {
   id: 0,
@@ -25,8 +26,7 @@ const productInitValues = {
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
-  product: Product = productInitValues;
-  loading: boolean = false;
+  productStream$: Observable<HttpRequestState<Product>>;
 
   constructor(
     private productService: ProductService,
@@ -34,24 +34,14 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const productId = this.route.snapshot.paramMap.get('id');
 
     if (productId) {
-      this.loading = true;
-
-      this.productService
+      this.productStream$ = this.productService
         .getProductById(productId)
-        .pipe(
-          finalize(() => {
-            this.loading = false;
-          })
-        )
-        .subscribe({
-          next: (res) => {
-            this.product = res;
-          },
-          error: (error) => console.error(error),
-        });
+        .pipe(httpRequestStates);
     }
   }
 }
