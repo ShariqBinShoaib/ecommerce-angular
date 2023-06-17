@@ -30,6 +30,7 @@ export class CartService {
 
   cartData$: Observable<CartResponse> = this.cartDataSubject.asObservable();
   cartCount$: Observable<number> = this.cartCountSubject.asObservable();
+  isLoading: boolean = true;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -45,9 +46,12 @@ export class CartService {
         products: [...this.cartData.products, ...cart.products],
       };
 
+      if (this.isLoading) this.isLoading = false;
+
       this.cartDataSubject.next(this.cartData);
       this.cartCountSubject.next(this.cartData.totalQuantity);
     } else {
+      this.isLoading = true;
       this.cartData = cartInitalValues;
       this.cartDataSubject.next(cartInitalValues);
       this.cartCountSubject.next(0);

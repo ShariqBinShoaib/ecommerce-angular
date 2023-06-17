@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export type SkeletonTypes = 'product-card' | 'product-detail';
+export type SkeletonTypes = 'product-card' | 'product-detail' | 'cart-item';
 @Component({
   selector: 'app-skeleton',
   templateUrl: './skeleton.component.html',

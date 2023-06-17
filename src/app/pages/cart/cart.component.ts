@@ -8,14 +8,16 @@ import { CartResponse } from 'src/app/types';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  cartSkeleton: unknown[] = Array(3);
   cartData: CartResponse | null = null;
+  isLoading: boolean = false;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    console.log('CART PAGE');
     this.cartService.cartData$.subscribe({
       next: (value) => {
+        this.isLoading = this.cartService.isLoading;
         this.cartData = value;
       },
       error: (err) => {
