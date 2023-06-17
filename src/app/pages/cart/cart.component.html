@@ -7,9 +7,9 @@
           <app-skeleton type="cart-item" *ngFor="let item of cartSkeleton" />
         </ng-container>
 
-        <ng-container *ngIf="cartData?.products?.length; else noItemMessage">
+        <ng-container *ngIf="cartData.products.length; else noItemMessage">
           <app-cart-item
-            *ngFor="let product of cartData?.products"
+            *ngFor="let product of cartData.products"
             [cartProduct]="product"
           />
         </ng-container>
@@ -24,13 +24,13 @@
     <div class="border-t border-gray-200 py-6">
       <div class="flex justify-between text-base font-medium text-gray-900">
         <p>Subtotal</p>
-        <p>${{ cartData?.total?.toFixed(2) }}</p>
+        <p>${{ cartData.total | numberFormatter }}</p>
       </div>
       <p class="mt-0.5 text-sm text-gray-500">
         Shipping and taxes calculated at checkout.
       </p>
       <div class="mt-6">
-        <app-button [disabled]="cartData?.products?.length === 0">
+        <app-button [disabled]="cartData.products.length === 0">
           Checkout
         </app-button>
       </div>

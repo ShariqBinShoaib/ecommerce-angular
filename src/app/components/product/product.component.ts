@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  @Input() product: Product | null = null;
+  @Input() product: Product;
   ratingArray: unknown[] = [];
 
   constructor(

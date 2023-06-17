@@ -10,7 +10,7 @@ import { Product, SelectOption } from 'src/app/types';
   styleUrls: ['./product-info.component.css'],
 })
 export class ProductInfoComponent implements OnChanges {
-  @Input() productInfo?: Omit<Product, 'images'>;
+  @Input() productInfo: Omit<Product, 'images'>;
   selectedQuantity: string = '1';
   ratingArray: unknown[] = [];
 

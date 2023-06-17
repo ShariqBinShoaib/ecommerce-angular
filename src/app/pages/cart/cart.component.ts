@@ -9,7 +9,7 @@ import { CartResponse } from 'src/app/types';
 })
 export class CartComponent implements OnInit {
   cartSkeleton: unknown[] = Array(3);
-  cartData: CartResponse | null = null;
+  cartData: CartResponse;
   isLoading: boolean = false;
 
   constructor(private cartService: CartService) {}

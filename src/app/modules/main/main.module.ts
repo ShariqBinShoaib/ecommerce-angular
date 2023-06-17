@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+// Modules
 import { MainRoutingModule } from './main-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -22,6 +23,9 @@ import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { MainComponent } from './main.component';
 import { CartService } from 'src/app/services/cart/cart.service';
 
+// Pipes
+import { NumberFormatterPipe } from 'src/app/pipes/number-formatter.pipe';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -36,6 +40,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
     ProductDetailComponent,
     ProductImagesComponent,
     ProductInfoComponent,
+    NumberFormatterPipe,
   ],
   providers: [CartService],
   imports: [CommonModule, MainRoutingModule, SharedModule, FormsModule],

@@ -8,7 +8,7 @@ import { CartProduct } from 'src/app/types';
   styleUrls: ['./cart-item.component.css'],
 })
 export class CartItemComponent {
-  @Input() cartProduct: CartProduct | null = null;
+  @Input() cartProduct: CartProduct;
 
   constructor(private cartService: CartService) {}
 

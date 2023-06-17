@@ -18,13 +18,13 @@
     <div>
       <div class="flex justify-between text-base font-medium text-gray-900">
         <h3>
-          <a href="#">{{ cartProduct?.title }}</a>
+          <a href="#">{{ cartProduct.title }}</a>
         </h3>
-        <p class="ml-4">${{ cartProduct?.price?.toFixed(2) }}</p>
+        <p class="ml-4">${{ cartProduct.price | numberFormatter }}</p>
       </div>
     </div>
     <div class="flex flex-1 items-end justify-between text-sm">
-      <p class="text-gray-500">Qty {{ cartProduct?.quantity }}</p>
+      <p class="text-gray-500">Qty {{ cartProduct.quantity }}</p>
 
       <div class="flex">
         <app-button variant="text" (onClick)="handleDelete()">
