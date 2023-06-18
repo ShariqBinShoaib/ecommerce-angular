@@ -12,7 +12,9 @@
   </a>
   <div class="mt-4">
     <div class="flex justify-between">
-      <h3 class="text-sm text-gray-700">
+      <h3
+        class="text-sm max-w-[200px] whitespace-nowrap text-ellipsis overflow-hidden text-gray-700"
+      >
         <a [routerLink]="['/products', product.id]">
           {{ product.title }}
         </a>

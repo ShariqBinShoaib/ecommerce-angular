@@ -15,7 +15,9 @@ import { httpRequestStates } from 'src/app/utils';
 export class ProductsComponent {
   skeletonArray: unknown[] = Array(8);
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   readonly ptoductsStream$: Observable<HttpRequestState<Product[]>> =
     this.productService.getProducts().pipe(httpRequestStates);
