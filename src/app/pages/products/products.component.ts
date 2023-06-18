@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { HttpRequestState, Product } from 'src/app/types';
-import { ProductService } from 'src/app/services/product/product.service';
 import { Observable } from 'rxjs';
+
+import {
+  ProductService,
+  Product,
+} from 'src/app/services/product/product.service';
+import { HttpRequestState } from 'src/app/types';
 import { httpRequestStates } from 'src/app/utils';
 
 @Component({

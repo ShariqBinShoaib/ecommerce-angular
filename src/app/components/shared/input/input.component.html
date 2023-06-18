@@ -37,10 +37,7 @@
       <ng-content select="[endIcon]"></ng-content>
     </div>
   </div>
-  <p
-    class="mt-[1px] text-[12px] text-red-600 dark:text-red-500"
-    *ngIf="isFieldInvalid"
-  >
+  <p class="mt-[1px] text-[12px] text-red-600" *ngIf="isFieldInvalid">
     <ng-container *ngIf="errors['required']">
       {{ errorMessage?.required }}
     </ng-container>

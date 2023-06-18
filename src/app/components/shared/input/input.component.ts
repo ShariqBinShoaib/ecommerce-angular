@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Injector,
@@ -41,6 +42,7 @@ export type ErrorMessage = {
     '(input)': '_onChange($event.target.value)',
     '(blur)': '_onBlur()',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() name: string = '';

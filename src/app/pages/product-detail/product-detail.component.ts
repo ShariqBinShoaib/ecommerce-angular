@@ -1,24 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, finalize } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { ProductService } from 'src/app/services/product/product.service';
-import { HttpRequestState, Product } from 'src/app/types';
+import {
+  ProductService,
+  Product,
+} from 'src/app/services/product/product.service';
+import { HttpRequestState } from 'src/app/types';
 import { httpRequestStates } from 'src/app/utils';
-
-const productInitValues = {
-  id: 0,
-  title: '',
-  description: '',
-  price: 0,
-  discountPercentage: 0,
-  rating: 0,
-  stock: 0,
-  brand: '',
-  category: '',
-  thumbnail: '',
-  images: [],
-};
 
 @Component({
   selector: 'app-product-detail',

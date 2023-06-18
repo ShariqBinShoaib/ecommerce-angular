@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-product-images',
@@ -10,7 +10,6 @@ export class ProductImagesComponent implements OnChanges {
   selectedImage = '';
 
   ngOnChanges(): void {
-    console.log(this.images);
     if (this.images.length) {
       this.selectedImage = this.images[0];
     }

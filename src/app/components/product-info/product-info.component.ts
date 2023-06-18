@@ -2,7 +2,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { Product, SelectOption } from 'src/app/types';
+import { Product } from 'src/app/services/product/product.service';
+import { SelectOption } from 'src/app/types';
 
 @Component({
   selector: 'app-product-info',
