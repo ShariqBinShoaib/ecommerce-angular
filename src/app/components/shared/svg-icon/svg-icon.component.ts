@@ -5,7 +5,6 @@ export type IconNames = 'cart' | 'user' | 'key' | 'info' | 'search' | 'loader';
 @Component({
   selector: 'app-svg-icon',
   templateUrl: './svg-icon.component.html',
-  styleUrls: ['./svg-icon.component.css'],
 })
 export class SvgIconComponent {
   @Input() name: IconNames;

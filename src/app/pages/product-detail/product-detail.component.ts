@@ -12,7 +12,6 @@ import { httpRequestStates } from 'src/app/utils';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
   productStream$: Observable<HttpRequestState<Product>>;

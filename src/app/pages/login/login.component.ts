@@ -8,7 +8,6 @@ import { BadRequestResponse } from 'src/app/types';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   loading: boolean = false;

@@ -8,7 +8,6 @@ import { SelectOption } from 'src/app/types';
 @Component({
   selector: 'app-product-info',
   templateUrl: './product-info.component.html',
-  styleUrls: ['./product-info.component.css'],
 })
 export class ProductInfoComponent implements OnChanges {
   @Input() productInfo: Omit<Product, 'images'>;

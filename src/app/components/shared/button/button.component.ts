@@ -5,7 +5,6 @@ type Variant = 'contained' | 'outlined' | 'text';
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css'],
 })
 export class ButtonComponent {
   @Input() className? = '';

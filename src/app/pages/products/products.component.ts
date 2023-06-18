@@ -11,7 +11,6 @@ import { httpRequestStates } from 'src/app/utils';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent {
   skeletonArray: unknown[] = Array(8);
